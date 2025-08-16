@@ -7,6 +7,8 @@ import shellcode
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from urllib.parse import urlparse
 
+TARGET_FILE = "target.txt"
+
 logging.basicConfig(
     level=logging.INFO,
     format='[%(asctime)s] [%(levelname)s] %(message)s',
@@ -56,11 +58,11 @@ def deduplicate_flags(flags_list):
     return unique_flags
 
 def main():
-    if not os.path.exists("../target.txt"):
+    if not os.path.exists("../" + TARGET_FILE):
         logging.error("target.txt file not found")
         return
 
-    with open("../target.txt", "r", encoding="utf-8") as f:
+    with open("../" + TARGET_FILE, "r", encoding="utf-8") as f:
         lines = f.readlines()
 
     urls = []
